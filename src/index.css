@@ -4,14 +4,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@layer {
+@layer base {
   * {
-    @apply m-0 p-0 box-border font-[Manrope];
+    @apply m-0 p-0 box-border font-[Manrope] font-medium;
   }
 }
 
 @theme {
-  --color-primeblue: oklch(0.5 0.2 250);
+  --color-primeblue: #38bdf8;
+  --color-primered: #ef4444;
   --color-primeblack: oklch(0.12 0.01 240);
 }
 
