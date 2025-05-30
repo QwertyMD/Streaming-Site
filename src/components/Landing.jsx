@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button.jsx";
 import CountUp from "@/components/react-bits/CountUp.jsx";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
@@ -38,7 +40,7 @@ const Landing = () => {
               Open<span className="text-primered font-bold">Flix</span>
             </p>
           </div>
-          <Button className="cursor-pointer p-7 rounded-xl bg-primeblue hover:bg-primeblue shadow-[0_2px_8px_var(--color-primeblue)] hover:shadow-[0_4px_16px_var(--color-primeblue)] transition-shadow">
+          <Button onClick={()=>navigate("/home")} className="cursor-pointer p-7 rounded-xl bg-primeblue hover:bg-primeblue shadow-[0_2px_8px_var(--color-primeblue)] hover:shadow-[0_4px_16px_var(--color-primeblue)] transition-shadow">
             <p className="text-lg">Start Watching</p>
           </Button>
         </motion.div>

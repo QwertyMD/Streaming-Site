@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "@/components/Layout.jsx";
 import Landing from "@/components/Landing.jsx";
 import NotFound from "@/pages/NotFound.jsx";
+import Home from "@/pages/Home.jsx";
 
 const App = () => {
   return (
@@ -10,6 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Landing />} />
+          <Route path="home" element={<Home />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
