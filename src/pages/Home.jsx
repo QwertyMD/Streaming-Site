@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
-import { motion, scale } from "framer-motion";
-import { SearchIcon } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Home = () => {
-  const [movies, setMovies] = useState([]);
-  const navItems = ["Home", "Movies", "TV Shows", "Collections"];
+  // const [movies, setMovies] = useState([]);
 
   // useEffect(() => {
   //   const fetchMovies = async () => {
@@ -15,48 +12,248 @@ const Home = () => {
   //       {
   //         params: {
   //           api_key: "f51f867a67bf6b61d0106400668ce722",
+  //           query: "Batman",
   //         },
   //       },
   //     );
-  //     setMovies(response.data);
+  //     setMovies(response.data.results);
   //   };
   //   fetchMovies();
   // }, []);
+
+  const movies = [
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+    {
+      adult: false,
+      backdrop_path: "/frDS8A5vIP927KYAxTVVKRIbqZw.jpg",
+      genre_ids: [14, 28, 80],
+      id: 268,
+      original_language: "en",
+      original_title: "Batman",
+      overview:
+        'Batman must face his most ruthless nemesis when a deformed madman calling himself "The Joker" seizes control of Gotham\'s criminal underworld.',
+      popularity: 8.1965,
+      poster_path: "/cij4dd21v2Rk2YtUQbV5kW69WB2.jpg",
+      release_date: "1989-06-21",
+      title: "Batman",
+      video: false,
+      vote_average: 7.234,
+      vote_count: 8066,
+    },
+  ];
 
   console.log(movies);
 
   return (
     <div className="px-10 py-4">
       <motion.div
-        initial={{ opacity: 0, y: -50 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0 }}
-        className="flex justify-between items-center"
+        className="grid gap-3"
       >
-        <NavLink to={"/"} className="flex items-center gap-3">
-          <div className="w-12 h-8 bg-cover bg-[url('OpenFlix.svg')]"></div>
-          <p className="text-primeblue text-2xl font-bold">
-            Open<span className="text-primered font-bold">Flix</span>
-          </p>
-        </NavLink>
-
-        <ul className="flex gap-20">
-          {navItems.map((item, index) => (
-            <li
-              key={index}
-              className="text-primeblue hover:text-primered cursor-pointer"
+        <p className="text-2xl">Popular Movies</p>
+        <div className="flex gap-3 flex-wrap">
+          {movies.map((movie) => (
+            <div
+              key={movie.id}
+              className={`rounded-lg flex flex-col items-center hover:outline-2 hover:outline-primeblue cursor-pointer relative overflow-hidden group`}
             >
-              <NavLink to={`/${item.toLowerCase()}`} className="text-lg">
-                {item}
-              </NavLink>
-            </li>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                alt=""
+                className="w-64 rounded-lg group-hover:scale-110 transition-transform"
+              />
+            </div>
           ))}
-        </ul>
-        <button className="cursor-pointer">
-          <SearchIcon className="text-primered" size={32}/>
-        </button>
+        </div>
       </motion.div>
-      <div className=""></div>
     </div>
   );
 };

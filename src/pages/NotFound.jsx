@@ -17,7 +17,7 @@ const NotFound = () => {
         onClick={() => navigate("/home")}
         className="cursor-pointer p-7 rounded-xl bg-primeblue hover:bg-primeblue shadow-[0_2px_8px_var(--color-primeblue)] hover:shadow-[0_4px_16px_var(--color-primeblue)] transition-shadow"
       >
-        <p className="text-lg">Go Back</p>
+        <p className="text-lg">Go to Home</p>
       </Button>
     </div>
   );
