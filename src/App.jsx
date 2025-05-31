@@ -7,21 +7,24 @@ import Home from "@/pages/Home.jsx";
 import Movies from "@/pages/Movies.jsx";
 import Shows from "@/pages/Shows.jsx";
 import Collections from "@/pages/Collections.jsx";
+import { CollectionsProvider } from "@/contexts/CollectionsContext.jsx";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Landing />} />
-          <Route path="home" element={<Home />} />
-          <Route path="movies" element={<Movies />} />
-          <Route path="shows" element={<Shows />} />
-          <Route path="collections" element={<Collections />} />
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <CollectionsProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Landing />} />
+            <Route path="home" element={<Home />} />
+            <Route path="movies" element={<Movies />} />
+            <Route path="shows" element={<Shows />} />
+            <Route path="collections" element={<Collections />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </CollectionsProvider>
   );
 };
 

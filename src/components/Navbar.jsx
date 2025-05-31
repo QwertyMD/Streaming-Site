@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { SearchIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import { CollectionsContext } from "@/contexts/CollectionsContext.jsx";
 
 const Navbar = () => {
   const navItems = ["Home", "Movies", "Shows", "Collections"];
+  const { collections } = useContext(CollectionsContext);
 
   return (
-    <div className="px-10 py-4">
+    <div className="px-10 py-5 sticky top-0 z-10 backdrop-blur-3xl bg-gradient-to-b from-primeblack">
       <motion.div
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -30,10 +32,10 @@ const Navbar = () => {
               <NavLink
                 to={`/${item.toLowerCase()}`}
                 className={(e) =>
-                  `${e.isActive && "text-primered bg-primeblue/10"} text-lg px-4 py-2 rounded-2xl`
+                  `${e.isActive && "text-primered bg-primeblue/10"} text-lg px-4 py-2 rounded-2xl flex relative`
                 }
               >
-                {item}
+                {item} {item === "Collections" && <p className="text-sm text-white rounded-full absolute right-2 top-1">{collections.length || ""}</p>}
               </NavLink>
             </li>
           ))}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar.jsx";
 
@@ -8,10 +8,20 @@ const Layout = () => {
     location.pathname,
   );
 
+  useEffect(() => {
+    const disableRightClick = (e) => {
+      e.preventDefault();
+    };
+
+    document.addEventListener("contextmenu", disableRightClick);
+
+    return () => {
+      document.removeEventListener("contextmenu", disableRightClick);
+    };
+  }, []);
+
   return (
-    <div className="relative min-h-screen cursor-default text-white">
-      <div className="absolute w-full min-h-screen bg-gradient-to-b from-primeblack/80 to-primeblack -z-20"></div>
-      <div className="absolute w-full min-h-screen bg-[url('https://www.transparenttextures.com/patterns/black-paper.png')] -z-10"></div>
+    <div className="relative min-h-screen cursor-default text-white select-none bg-primeblack/90">
       {showNavbar && <Navbar />}
       <Outlet />
     </div>
