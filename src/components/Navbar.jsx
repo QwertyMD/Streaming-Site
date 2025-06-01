@@ -10,8 +10,9 @@ import axios from "axios";
 const Navbar = () => {
   const navItems = ["Home", "Movies", "Shows", "Collections"];
   const { collections } = useContext(CollectionsContext);
-  const [searchItem, setSearchItem] = useState();
+  const [searchItem, setSearchItem] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const fetchSearch = async () => {
     const response = await axios.get(
@@ -65,21 +66,37 @@ const Navbar = () => {
           ))}
         </ul>
         <div className="flex items-center gap-3 relative">
-          <button className="cursor-pointer">
+          <button
+            onClick={() => setSearchOpen(!searchOpen)}
+            className="cursor-pointer"
+          >
             <SearchIcon className="text-primered" size={32} />
           </button>
-          <Input
-            onChange={(e) => {
-              setSearchItem(e.target.value);
-              fetchSearch();
-              console.log(searchResults);
-            }}
-            className="border-primeblue focus-visible:border-primered focus-visible:ring-primered w-96 selection:bg-white selection:text-primeblack"
-          />
-          {searchItem >= 2 && (
-            <div className="absolute top-20 bg-primeblack w-full h-96 overflow-y-scroll rounded-lg">
+          {searchOpen && (
+            <motion.div
+              initial={{ width: "0px" }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 0.5, delay: 0 }}
+            >
+              <Input
+                onChange={(e) => {
+                  setSearchItem(e.target.value);
+                  fetchSearch();
+                  console.log(searchResults);
+                }}
+                className="border-primeblue focus-visible:border-primered focus-visible:ring-primered w-96 selection:bg-white selection:text-primeblack"
+              />
+            </motion.div>
+          )}
+          {searchItem.length >= 2 && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0 }}
+              className="absolute top-20 bg-primeblack w-full h-96 overflow-y-scroll rounded-lg"
+            >
               <SearchResults results={searchResults} />
-            </div>
+            </motion.div>
           )}
         </div>
       </motion.div>
