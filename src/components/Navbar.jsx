@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { SearchIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { CollectionsContext } from "@/contexts/CollectionsContext.jsx";
+import { Input } from "./ui/input";
 
 const Navbar = () => {
   const navItems = ["Home", "Movies", "Shows", "Collections"];
@@ -35,14 +36,23 @@ const Navbar = () => {
                   `${e.isActive && "text-primered bg-primeblue/10"} text-lg px-4 py-2 rounded-2xl flex relative`
                 }
               >
-                {item} {item === "Collections" && <p className="text-sm text-white rounded-full absolute right-2 top-1">{collections.length || ""}</p>}
+                {item}{" "}
+                {item === "Collections" && (
+                  <p className="text-sm text-white rounded-full absolute right-2 top-1">
+                    {collections.length || ""}
+                  </p>
+                )}
               </NavLink>
             </li>
           ))}
         </ul>
-        <button className="cursor-pointer">
-          <SearchIcon className="text-primered" size={32} />
-        </button>
+        <div className="flex items-center gap-3">
+          <button className="cursor-pointer">
+            <SearchIcon className="text-primered" size={32} />
+          </button>
+          <Input className="border-primeblue focus-visible:border-primered focus-visible:ring-primered" />
+          <div className="absolute top-20 bg-red-500">hello</div>
+        </div>
       </motion.div>
     </div>
   );

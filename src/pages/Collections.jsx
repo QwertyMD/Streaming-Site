@@ -34,8 +34,8 @@ const Collections = () => {
                 <Star className="text-yellow-300" />
                 <p className="text-lg">{collection.vote_average.toFixed(2)}</p>
               </div>
-              <button onClick={() => removeFromCollection(collection.id)}>
-                <Trash className="bg-primeblue rounded-full cursor-pointer p-1" />
+              <button onClick={() => removeFromCollection(collection.id)} className="bg-primeblue rounded-full cursor-pointer p-1">
+                <Trash />
               </button>
             </div>
           </div>
