@@ -1,13 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { SearchIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { CollectionsContext } from "@/contexts/CollectionsContext.jsx";
 import { Input } from "./ui/input";
+import SearchResults from "./SearchResults";
+import axios from "axios";
 
 const Navbar = () => {
   const navItems = ["Home", "Movies", "Shows", "Collections"];
   const { collections } = useContext(CollectionsContext);
+  const [searchItem, setSearchItem] = useState();
+  const [searchResults, setSearchResults] = useState([]);
+
+  const fetchSearch = async () => {
+    const response = await axios.get(
+      "https://api.themoviedb.org/3/search/movie",
+      {
+        params: {
+          api_key: "f51f867a67bf6b61d0106400668ce722",
+          language: "en-US",
+          query: searchItem,
+        },
+      }
+    );
+    setSearchResults(response.data.results);
+  };
 
   return (
     <div className="px-10 py-5 sticky top-0 z-10 backdrop-blur-3xl bg-gradient-to-b from-primeblack">
@@ -46,12 +64,23 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 relative">
           <button className="cursor-pointer">
             <SearchIcon className="text-primered" size={32} />
           </button>
-          <Input className="border-primeblue focus-visible:border-primered focus-visible:ring-primered" />
-          <div className="absolute top-20 bg-red-500">hello</div>
+          <Input
+            onChange={(e) => {
+              setSearchItem(e.target.value);
+              fetchSearch();
+              console.log(searchResults);
+            }}
+            className="border-primeblue focus-visible:border-primered focus-visible:ring-primered w-96 selection:bg-white selection:text-primeblack"
+          />
+          {searchItem >= 2 && (
+            <div className="absolute top-20 bg-primeblack w-full h-96 overflow-y-scroll rounded-lg">
+              <SearchResults results={searchResults} />
+            </div>
+          )}
         </div>
       </motion.div>
     </div>

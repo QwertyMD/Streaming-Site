@@ -12,10 +12,9 @@ const Home = () => {
   const scrollContainerRef2 = useRef(null);
   const scrollContainerRef3 = useRef(null);
 
-  const addScrollHandler = (containerRef) => {
-    useEffect(() => {
+  useEffect(() => {
+    const addScrollHandler = (containerRef) => {
       const container = containerRef.current;
-
       const handleWheel = (e) => {
         if (e.shiftKey) {
           e.preventDefault();
@@ -28,12 +27,11 @@ const Home = () => {
       return () => {
         container.removeEventListener("wheel", handleWheel);
       };
-    }, [containerRef]);
-  };
-
-  addScrollHandler(scrollContainerRef1);
-  addScrollHandler(scrollContainerRef2);
-  addScrollHandler(scrollContainerRef3);
+    };
+    addScrollHandler(scrollContainerRef1);
+    addScrollHandler(scrollContainerRef2);
+    addScrollHandler(scrollContainerRef3);
+  }, []);
 
   useEffect(() => {
     const fetchTrendingMovies = async () => {
