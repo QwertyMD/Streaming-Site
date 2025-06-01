@@ -40,16 +40,21 @@ const ScrollableList = ({ title, highlights, containerRef }) => {
                   <Star className="text-yellow-300" />
                   <p className="text-lg">{highlight.vote_average.toFixed(2)}</p>
                 </div>
-                <button
-                  onClick={() => addToCollection(highlight)}
-                  className="bg-primeblue rounded-full cursor-pointer p-1"
-                >
-                  <Plus />
-                </button>
-                <button onClick={()=>navigate(`/movie/${highlight.id}`)} className="bg-primeblue rounded-full cursor-pointer p-1">
-                  <Play />
-                </button>
               </div>
+                <div className="absolute top-0 w-full h-full gap-2 items-center justify-center hidden group-hover:flex">
+                  <button
+                    onClick={() => navigate(`/movie/${highlight.id}`)}
+                    className="bg-white/30 backdrop-blur-md rounded-full cursor-pointer p-2 hover:text-primered hover:bg-primeblue transition-colors"
+                  >
+                    <Play size={32} />
+                  </button>
+                  <button
+                    onClick={() => addToCollection(highlight)}
+                    className="bg-white/30 backdrop-blur-md rounded-full cursor-pointer p-2 hover:text-primered hover:bg-primeblue transition-colors"
+                  >
+                    <Plus size={32} />
+                  </button>
+                </div>
             </div>
           ))}
         </div>

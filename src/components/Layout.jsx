@@ -21,7 +21,7 @@ const Layout = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen cursor-default text-white select-none bg-primeblack/90 overflow-hidden">
+    <div className="relative min-h-screen cursor-default text-white select-none bg-primeblack/90">
       {showNavbar && <Navbar />}
       <Outlet />
     </div>

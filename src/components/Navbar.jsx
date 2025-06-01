@@ -73,20 +73,14 @@ const Navbar = () => {
             <SearchIcon className="text-primered" size={32} />
           </button>
           {searchOpen && (
-            <motion.div
-              initial={{ width: "0px" }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 0.5, delay: 0 }}
-            >
-              <Input
-                onChange={(e) => {
-                  setSearchItem(e.target.value);
-                  fetchSearch();
-                  console.log(searchResults);
-                }}
-                className="border-primeblue focus-visible:border-primered focus-visible:ring-primered w-96 selection:bg-white selection:text-primeblack"
-              />
-            </motion.div>
+            <Input
+              onChange={(e) => {
+                setSearchItem(e.target.value);
+                fetchSearch();
+                console.log(searchResults);
+              }}
+              className="border-primeblue focus-visible:border-primered focus-visible:ring-primered w-96 selection:bg-white selection:text-primeblack"
+            />
           )}
           {searchItem.length >= 2 && (
             <motion.div
