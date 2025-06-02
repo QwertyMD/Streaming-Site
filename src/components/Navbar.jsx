@@ -1,9 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { SearchIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { CollectionsContext } from "@/contexts/CollectionsContext.jsx";
-import { Input } from "./ui/input";
 import SearchResults from "./SearchResults";
 import axios from "axios";
 
@@ -13,10 +12,20 @@ const Navbar = () => {
   const [searchItem, setSearchItem] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [isTV, setisTV] = useState(false);
+
+  const handleSearchChange = (e) => {
+    setSearchItem(e.target.value);
+    if (e.target.value.length > 2) {
+      fetchSearch();
+    }
+  };
+
+  console.log(searchResults);
 
   const fetchSearch = async () => {
     const response = await axios.get(
-      "https://api.themoviedb.org/3/search/movie",
+      `https://api.themoviedb.org/3/search/${isTV ? "tv" : "movie"}`,
       {
         params: {
           api_key: "f51f867a67bf6b61d0106400668ce722",
@@ -27,6 +36,10 @@ const Navbar = () => {
     );
     setSearchResults(response.data.results);
   };
+
+  useEffect(() => {
+    fetchSearch();
+  }, [isTV]);
 
   return (
     <div className="px-10 py-5 sticky top-0 z-10 backdrop-blur-3xl bg-gradient-to-b from-primeblack">
@@ -65,7 +78,7 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
-        <div className="flex items-center gap-3 relative">
+        <div className="flex items-center gap-3">
           <button
             onClick={() => setSearchOpen(!searchOpen)}
             className="cursor-pointer"
@@ -73,23 +86,20 @@ const Navbar = () => {
             <SearchIcon className="text-primered" size={32} />
           </button>
           {searchOpen && (
-            <Input
-              onChange={(e) => {
-                setSearchItem(e.target.value);
-                fetchSearch();
-                console.log(searchResults);
-              }}
-              className="border-primeblue focus-visible:border-primered focus-visible:ring-primered w-96 selection:bg-white selection:text-primeblack"
-            />
-          )}
-          {searchItem.length >= 2 && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0 }}
-              className="absolute top-20 bg-primeblack w-full h-96 overflow-y-scroll rounded-lg"
+              className="absolute inset-0 -z-10 flex justify-center items-center h-screen"
             >
-              <SearchResults results={searchResults} />
+              <SearchResults
+                results={searchResults}
+                search={fetchSearch}
+                change={handleSearchChange}
+                item={searchItem}
+                type={isTV}
+                setType={setisTV}
+              />
             </motion.div>
           )}
         </div>
