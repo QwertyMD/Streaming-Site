@@ -4,7 +4,7 @@ import { Play, Plus, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-const ScrollableList = ({ title, highlights, containerRef }) => {
+const ScrollableList = ({ title, highlights, containerRef, type }) => {
   const { addToCollection } = useContext(CollectionsContext);
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const ScrollableList = ({ title, highlights, containerRef }) => {
           {highlights.map((highlight) => (
             <div
               key={`${highlight.id}`}
-              className="w-[209px] relative shrink-0 overflow-hidden rounded-lg group snap-start"
+              className="w-56 relative shrink-0 overflow-hidden rounded-lg group snap-start"
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${highlight.poster_path}`}
@@ -41,20 +41,20 @@ const ScrollableList = ({ title, highlights, containerRef }) => {
                   <p className="text-lg">{highlight.vote_average.toFixed(2)}</p>
                 </div>
               </div>
-                <div className="absolute top-0 w-full h-full gap-2 items-center justify-center hidden group-hover:flex">
-                  <button
-                    onClick={() => navigate(`/movie/${highlight.id}`)}
-                    className="bg-white/30 backdrop-blur-md rounded-full cursor-pointer p-2 hover:text-primered hover:bg-primeblue transition-colors"
-                  >
-                    <Play size={32} />
-                  </button>
-                  <button
-                    onClick={() => addToCollection(highlight)}
-                    className="bg-white/30 backdrop-blur-md rounded-full cursor-pointer p-2 hover:text-primered hover:bg-primeblue transition-colors"
-                  >
-                    <Plus size={32} />
-                  </button>
-                </div>
+              <div className="absolute top-0 w-full h-full gap-2 items-center justify-center hidden group-hover:flex">
+                <button
+                  onClick={() => navigate(`/${type}/${highlight.id}`)}
+                  className="bg-white/30 backdrop-blur-md rounded-full cursor-pointer p-2 hover:text-primered hover:bg-primeblue transition-colors"
+                >
+                  <Play />
+                </button>
+                <button
+                  onClick={() => addToCollection(highlight)}
+                  className="bg-white/30 backdrop-blur-md rounded-full cursor-pointer p-2 hover:text-primered hover:bg-primeblue transition-colors"
+                >
+                  <Plus />
+                </button>
+              </div>
             </div>
           ))}
         </div>

@@ -9,6 +9,7 @@ import Shows from "@/pages/Shows.jsx";
 import Collections from "@/pages/Collections.jsx";
 import { CollectionsProvider } from "@/contexts/CollectionsContext.jsx";
 import WatchMovie from "@/pages/WatchMovie.jsx";
+import WatchShow from "./pages/WatchShow";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
             <Route path="shows" element={<Shows />} />
             <Route path="collections" element={<Collections />} />
             <Route path="movie/:id" element={<WatchMovie />} />
+            <Route path="tv/:id" element={<WatchShow />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

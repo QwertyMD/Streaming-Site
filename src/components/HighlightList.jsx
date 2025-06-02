@@ -2,9 +2,12 @@ import { Play, Plus, Star } from "lucide-react";
 import React, { useContext } from "react";
 import { motion } from "framer-motion";
 import { CollectionsContext } from "@/contexts/CollectionsContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 const HighlightList = ({ highlights, containerRef }) => {
   const { addToCollection } = useContext(CollectionsContext);
+  const navigate = useNavigate();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: -30 }}
@@ -40,12 +43,21 @@ const HighlightList = ({ highlights, containerRef }) => {
                   {highlight.title || highlight.name}
                 </h2>
                 <div className="flex gap-5">
-                  <button className="bg-white/30 p-2 rounded-full cursor-pointer">
+                  <button
+                    onClick={() =>
+                      navigate(
+                        highlight.media_type === "tv"
+                          ? `/tv/${highlight.id}`
+                          : `/movie/${highlight.id}`
+                      )
+                    }
+                    className="bg-white/30 p-2 rounded-full cursor-pointer hover:text-primered hover:bg-primeblue transition-colors"
+                  >
                     <Play />
                   </button>
                   <button
                     onClick={() => addToCollection(highlight)}
-                    className="bg-white/30 p-2 rounded-full cursor-pointer"
+                    className="bg-white/30 p-2 rounded-full cursor-pointer hover:text-primered hover:bg-primeblue transition-colors"
                   >
                     <Plus />
                   </button>

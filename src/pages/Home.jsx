@@ -76,6 +76,11 @@ const Home = () => {
     fetchTrendingAll();
   }, []);
 
+  console.log(discoverMovies);
+  console.log(discoverShows);
+  console.log(trendingAll);
+  
+
   return (
     <div className="px-10 py-5 grid gap-10">
       <HighlightList
@@ -86,11 +91,13 @@ const Home = () => {
         title="Discover Movies"
         highlights={discoverMovies}
         containerRef={scrollContainerRef1}
+        type="movie"
       />
       <ScrollableList
         title="Discover Shows"
         highlights={discoverShows}
         containerRef={scrollContainerRef2}
+        type="tv"
       />
     </div>
   );
