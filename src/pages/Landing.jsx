@@ -9,13 +9,13 @@ const Landing = () => {
   return (
     <div className="min-h-screen items-center justify-center flex">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0 }}
           className="flex flex-col items-center gap-20"
         >
           <div className="flex flex-col items-center gap-5">
-            <div className="w-48 h-32 bg-[url('OpenFlix.svg')] bg-cover"></div>
+            <img src="OpenFlix.png" alt="" className="w-48 h-32" draggable={false}/>
             <p className="font-bold text-6xl text-primeblue">
               Open<span className="text-primered font-bold">Flix</span>
             </p>

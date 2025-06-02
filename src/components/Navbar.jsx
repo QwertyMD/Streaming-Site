@@ -50,7 +50,12 @@ const Navbar = () => {
         className="flex justify-between items-center"
       >
         <NavLink to={"/"} className="flex items-center gap-3">
-          <div className="w-12 h-8 bg-cover bg-[url('OpenFlix.svg')]"></div>
+          <img
+            src="OpenFlix.png"
+            alt=""
+            className="w-12 h-8"
+            draggable={false}
+          />
           <p className="text-primeblue text-2xl font-bold">
             Open<span className="text-primered font-bold">Flix</span>
           </p>
