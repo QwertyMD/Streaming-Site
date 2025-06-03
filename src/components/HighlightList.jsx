@@ -1,20 +1,45 @@
-import { Play, Plus, Star } from "lucide-react";
-import React, { useContext } from "react";
+import { ArrowLeft, ArrowRight, Play, Plus, Star } from "lucide-react";
+import React, { useContext, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { CollectionsContext } from "@/contexts/CollectionsContext.jsx";
 import { useNavigate } from "react-router-dom";
 
-const HighlightList = ({ highlights, containerRef }) => {
+const HighlightList = ({ highlights, scroll }) => {
   const { addToCollection } = useContext(CollectionsContext);
   const navigate = useNavigate();
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    setInterval(() => {
+      scroll(containerRef, "right");
+    }, 3000);
+  }, []);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0 }}
-      className="grid gap-10"
+      className="grid gap-3"
     >
+      <div className="flex items-center justify-between">
+        <p className="text-xl">Trending</p>
+
+        <div className="flex gap-3">
+          <button
+            onClick={() => scroll(containerRef, "left")}
+            className="cursor-pointer bg-white/10 rounded-full p-1"
+          >
+            <ArrowLeft />
+          </button>
+          <button
+            onClick={() => scroll(containerRef, "right")}
+            className="cursor-pointer bg-white/10 rounded-full p-1"
+          >
+            <ArrowRight />
+          </button>
+        </div>
+      </div>
       <div
         className="flex gap-3 overflow-hidden scroll-smooth snap-x snap-mandatory"
         ref={containerRef}
@@ -48,7 +73,7 @@ const HighlightList = ({ highlights, containerRef }) => {
                       navigate(
                         highlight.media_type === "tv"
                           ? `/tv/${highlight.id}`
-                          : `/movie/${highlight.id}`
+                          : `/movie/${highlight.id}`,
                       )
                     }
                     className="bg-white/30 p-2 rounded-full cursor-pointer hover:text-primered hover:bg-primeblue transition-colors"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ScrollableList from "@/components/ScrollableList.jsx";
 import HighlightList from "@/components/HighlightList.jsx";
@@ -8,30 +8,14 @@ const Home = () => {
   const [discoverShows, setDiscoverShows] = useState([]);
   const [trendingAll, setTrendingAll] = useState([]);
 
-  const scrollContainerRef1 = useRef(null);
-  const scrollContainerRef2 = useRef(null);
-  const scrollContainerRef3 = useRef(null);
-
-  useEffect(() => {
-    const addScrollHandler = (containerRef) => {
-      const container = containerRef.current;
-      const handleWheel = (e) => {
-        if (e.shiftKey) {
-          e.preventDefault();
-          container.scrollLeft += e.deltaY * 6;
-        }
-      };
-
-      container.addEventListener("wheel", handleWheel);
-
-      return () => {
-        container.removeEventListener("wheel", handleWheel);
-      };
-    };
-    addScrollHandler(scrollContainerRef1);
-    addScrollHandler(scrollContainerRef2);
-    addScrollHandler(scrollContainerRef3);
-  }, []);
+  const scroll = (ref, direction) => {
+    if (ref.current) {
+      ref.current.scrollBy({
+        left: direction === "left" ? -1000 : 1000,
+        behavior: "smooth",
+      });
+    }
+  };
 
   useEffect(() => {
     const fetchTrendingMovies = async () => {
@@ -42,7 +26,7 @@ const Home = () => {
             api_key: "f51f867a67bf6b61d0106400668ce722",
             language: "en-US",
           },
-        }
+        },
       );
       setDiscoverMovies(response.data.results);
     };
@@ -56,7 +40,7 @@ const Home = () => {
             api_key: "f51f867a67bf6b61d0106400668ce722",
             language: "en-US",
           },
-        }
+        },
       );
       setDiscoverShows(response.data.results);
     };
@@ -70,37 +54,34 @@ const Home = () => {
             api_key: "f51f867a67bf6b61d0106400668ce722",
             language: "en-US",
           },
-        }
+        },
       );
       setTrendingAll(response.data.results);
     };
     fetchTrendingAll();
   }, []);
 
-  console.log(discoverMovies);
-  console.log(discoverShows);
-  console.log(trendingAll);
+  // console.log(discoverMovies);
+  // console.log(discoverShows);
+  // console.log(trendingAll);
 
   return (
     <div
-      className="grid gap-5 overflow-y-scroll bg-white/5 p-3 rounded-lg"
+      className="grid gap-10 overflow-y-scroll bg-white/5 p-3 rounded-lg"
       style={{ scrollbarWidth: "none" }}
     >
-      <HighlightList
-        highlights={trendingAll}
-        containerRef={scrollContainerRef3}
-      />
+      <HighlightList highlights={trendingAll} scroll={scroll} />
       <ScrollableList
         title="Discover Movies"
         highlights={discoverMovies}
-        containerRef={scrollContainerRef1}
         type="movie"
+        scroll={scroll}
       />
       <ScrollableList
         title="Discover Shows"
         highlights={discoverShows}
-        containerRef={scrollContainerRef2}
         type="tv"
+        scroll={scroll}
       />
     </div>
   );

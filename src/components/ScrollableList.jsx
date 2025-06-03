@@ -1,12 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { CollectionsContext } from "@/contexts/CollectionsContext.jsx";
-import { Play, Plus, Star } from "lucide-react";
+import { ArrowRight, ArrowLeft, Play, Plus, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-const ScrollableList = ({ title, highlights, containerRef, type }) => {
+const ScrollableList = ({ title, highlights, type, scroll }) => {
   const { addToCollection } = useContext(CollectionsContext);
   const navigate = useNavigate();
+  const containerRef = useRef(null);
 
   return (
     <motion.div
@@ -16,7 +17,23 @@ const ScrollableList = ({ title, highlights, containerRef, type }) => {
       className="grid gap-10"
     >
       <div className="grid gap-3">
-        <p className="text-xl">{title}</p>
+        <div className="flex items-center justify-between">
+          <p className="text-xl">{title}</p>
+          <div className="flex gap-3">
+            <button
+              onClick={()=> scroll(containerRef, "left")}
+              className="cursor-pointer bg-white/10 rounded-full p-1"
+            >
+              <ArrowLeft />
+            </button>
+            <button
+              onClick={() => scroll(containerRef, "right")}
+              className="cursor-pointer bg-white/10 rounded-full p-1"
+            >
+              <ArrowRight />
+            </button>
+          </div>
+        </div>
         <div
           className="flex gap-3 overflow-hidden scroll-smooth snap-x snap-mandatory"
           ref={containerRef}
@@ -24,7 +41,7 @@ const ScrollableList = ({ title, highlights, containerRef, type }) => {
           {highlights.map((highlight) => (
             <div
               key={`${highlight.id}`}
-              className="w-56 relative shrink-0 overflow-hidden rounded-lg group snap-start"
+              className="w-48 relative shrink-0 overflow-hidden rounded-lg group snap-center"
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${highlight.poster_path}`}

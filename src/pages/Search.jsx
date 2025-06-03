@@ -35,7 +35,7 @@ const Search = () => {
       setSearchResults(filteredResults);
     };
     fetchSearch();
-    console.log(searchResults);
+    // console.log(searchResults);
   }, [searchItem, category]);
 
   return (
