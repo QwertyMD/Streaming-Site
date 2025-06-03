@@ -68,6 +68,7 @@ const Home = () => {
         {
           params: {
             api_key: "f51f867a67bf6b61d0106400668ce722",
+            language: "en-US",
           },
         }
       );
@@ -79,10 +80,12 @@ const Home = () => {
   console.log(discoverMovies);
   console.log(discoverShows);
   console.log(trendingAll);
-  
 
   return (
-    <div className="px-10 py-5 grid gap-10">
+    <div
+      className="grid gap-5 overflow-y-scroll bg-white/5 p-3 rounded-lg"
+      style={{ scrollbarWidth: "none" }}
+    >
       <HighlightList
         highlights={trendingAll}
         containerRef={scrollContainerRef3}

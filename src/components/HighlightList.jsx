@@ -10,7 +10,7 @@ const HighlightList = ({ highlights, containerRef }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: -30 }}
+      initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0 }}
       className="grid gap-10"
@@ -22,7 +22,7 @@ const HighlightList = ({ highlights, containerRef }) => {
         {highlights.map((highlight) => (
           <div
             key={`${highlight.id}`}
-            className="w-full h-[40rem] relative shrink-0 overflow-hidden rounded-lg snap-center"
+            className="w-full h-[30rem] relative shrink-0 overflow-hidden rounded-lg snap-center"
           >
             <img
               src={`https://image.tmdb.org/t/p/original${highlight.backdrop_path}`}
@@ -34,7 +34,7 @@ const HighlightList = ({ highlights, containerRef }) => {
               src={`https://image.tmdb.org/t/p/original${highlight.poster_path}`}
               alt=""
               draggable={false}
-              className="w-md rounded-lg right-30 absolute rotate-12"
+              className="w-md rounded-lg -top-10 right-30 absolute rotate-12"
             />
             <div className="absolute w-full h-1/2 bottom-0 bg-gradient-to-t from-primeblack via-primeblack/30"></div>
             <div className="absolute bottom-0 left-0 w-full p-5 grid gap-3">

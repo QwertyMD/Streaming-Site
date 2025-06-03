@@ -10,13 +10,13 @@ const ScrollableList = ({ title, highlights, containerRef, type }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1, delay: 0 }}
       className="grid gap-10"
     >
       <div className="grid gap-3">
-        <p className="text-2xl">{title}</p>
+        <p className="text-xl">{title}</p>
         <div
           className="flex gap-3 overflow-hidden scroll-smooth snap-x snap-mandatory"
           ref={containerRef}
