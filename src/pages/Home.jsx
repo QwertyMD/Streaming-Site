@@ -67,7 +67,7 @@ const Home = () => {
 
   return (
     <div
-      className="grid gap-10 overflow-y-scroll bg-white/5 p-3 rounded-lg"
+      className="grid gap-10 overflow-y-scroll bg-white/10 p-3 rounded-lg"
       style={{ scrollbarWidth: "none" }}
     >
       <HighlightList highlights={trendingAll} scroll={scroll} />

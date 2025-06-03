@@ -40,7 +40,7 @@ const Search = () => {
 
   return (
     <div
-      className="w-full bg-white/5 p-3 rounded-lg overflow-y-scroll"
+      className="w-full bg-white/10 p-3 rounded-lg overflow-y-scroll"
       style={{ scrollbarWidth: "none" }}
     >
       <motion.div
@@ -49,25 +49,34 @@ const Search = () => {
         transition={{ duration: 1, delay: 0 }}
         className="grid gap-3"
       >
-        <p>Search</p>
+        <p className="text-xl">Search</p>
         <Input
           onChange={(e) => setSearchItem(e.target.value)}
           className="selection:bg-white selection:text-primeblack border-none bg-white/5 !text-base"
           placeholder="What are you looking for?"
         />
         <DropdownMenu>
-          <DropdownMenuTrigger className="flex justify-between px-3 py-1 bg-white/5 rounded-sm focus:outline-none text-sm w-32 text-start">
+          <DropdownMenuTrigger className="flex justify-between px-3 py-1 bg-white/5 rounded-sm focus:outline-none w-32 text-start cursor-pointer">
             <p>{category}</p>
             <ArrowBigDown size={20} />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-white/5 backdrop-blur-3xl border-none text-white">
-            <DropdownMenuItem onClick={() => setCategory("All")}>
+          <DropdownMenuContent className="bg-[#333537] border-none text-white">
+            <DropdownMenuItem
+              onClick={() => setCategory("All")}
+              className="cursor-pointer"
+            >
               All
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setCategory("Movies")}>
+            <DropdownMenuItem
+              onClick={() => setCategory("Movies")}
+              className="cursor-pointer"
+            >
               Movies
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => setCategory("Shows")}>
+            <DropdownMenuItem
+              onClick={() => setCategory("Shows")}
+              className="cursor-pointer"
+            >
               Shows
             </DropdownMenuItem>
           </DropdownMenuContent>

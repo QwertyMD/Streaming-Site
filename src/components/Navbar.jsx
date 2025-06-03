@@ -2,13 +2,35 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CollectionsContext } from "@/contexts/CollectionsContext.jsx";
+import { Search, Home, Clapperboard, Monitor, Heart } from "lucide-react";
 
 const Navbar = () => {
-  const navItems = ["Search", "Home", "Movies", "Shows", "Collections"];
+  const navItems = [
+    {
+      name: "Search",
+      icon: <Search />,
+    },
+    {
+      name: "Home",
+      icon: <Home />,
+    },
+    {
+      name: "Movies",
+      icon: <Clapperboard />,
+    },
+    {
+      name: "Shows",
+      icon: <Monitor />,
+    },
+    {
+      name: "Collections",
+      icon: <Heart />,
+    },
+  ];
   const { collections } = useContext(CollectionsContext);
 
   return (
-    <div className="p-5 bg-white/5 rounded-lg">
+    <div className="p-5 bg-white/10 rounded-lg">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -29,22 +51,22 @@ const Navbar = () => {
 
         <ul className="grid gap-3 w-64">
           {navItems.map((item, index) => (
-            <li
-              key={index}
-              className="text-primeblue hover:text-primered cursor-pointer"
-            >
+            <li key={index} className=" cursor-pointer">
               <NavLink
-                to={`/${item.toLowerCase()}`}
+                to={`/${item.name.toLowerCase()}`}
                 className={(e) =>
-                  `${e.isActive && "text-primered bg-primeblue/10"} text-lg px-4 py-2 rounded-2xl flex gap-1 relative`
+                  `${e.isActive && "bg-white/10 hover:bg-white/10"} hover:bg-white/5 text-lg px-4 py-2 rounded-lg flex gap-1 relative transition-colors`
                 }
               >
-                {item}{" "}
-                {item === "Collections" && (
-                  <p className="text-sm text-white">
-                    {collections.length || ""}
-                  </p>
-                )}
+                <div className="flex gap-3 items-center">
+                  {item.icon}
+                  <p>{item.name}</p>
+                  {item.name === "Collections" && (
+                    <p className="text-sm text-white">
+                      {collections.length || ""}
+                    </p>
+                  )}
+                </div>
               </NavLink>
             </li>
           ))}

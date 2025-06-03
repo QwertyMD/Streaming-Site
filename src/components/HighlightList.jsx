@@ -76,13 +76,13 @@ const HighlightList = ({ highlights, scroll }) => {
                           : `/movie/${highlight.id}`,
                       )
                     }
-                    className="bg-white/30 p-2 rounded-full cursor-pointer hover:text-primered hover:bg-primeblue transition-colors"
+                    className="bg-white/30 backdrop-blur-md rounded-full cursor-pointer p-2  hover:bg-white/10 transition-colors"
                   >
                     <Play />
                   </button>
                   <button
                     onClick={() => addToCollection(highlight)}
-                    className="bg-white/30 p-2 rounded-full cursor-pointer hover:text-primered hover:bg-primeblue transition-colors"
+                    className="bg-white/30 backdrop-blur-md rounded-full cursor-pointer p-2  hover:bg-white/10 transition-colors"
                   >
                     <Plus />
                   </button>

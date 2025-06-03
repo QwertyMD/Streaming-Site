@@ -1,23 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
+import Watch from "@/components/Watch.jsx";
 
 const WatchShow = () => {
   const { id } = useParams();
+  const [showDetails, setShowDetails] = useState(null);
 
-  return (
-    <div className="p-5">
-      <div className="w-full h-[calc(100vh-40px)]">
-        <iframe
-          src={`https://player.videasy.net/tv/${id}`}
-          width="100%"
-          height="100%"
-          frameborder="0"
-          allowfullscreen
-          allow="encrypted-media"
-        ></iframe>
-      </div>
-    </div>
-  );
+  useEffect(() => {
+    const fetchShowDetails = async () => {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/tv/${id}`,
+        {
+          params: {
+            api_key: "f51f867a67bf6b61d0106400668ce722",
+            language: "en-US",
+          },
+        },
+      );
+      setShowDetails(response.data);
+    };
+    fetchShowDetails();
+  }, [id]);
+
+  console.log(showDetails);
+
+  return <Watch id={id} type="tv" details={showDetails} />;
 };
 
 export default WatchShow;
