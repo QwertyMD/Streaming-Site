@@ -29,7 +29,10 @@ const Search = () => {
           },
         },
       );
-      setSearchResults(response.data.results);
+      const filteredResults = response.data.results.filter(
+        (result) => result.media_type !== "person",
+      );
+      setSearchResults(filteredResults);
     };
     fetchSearch();
     console.log(searchResults);
@@ -69,7 +72,7 @@ const Search = () => {
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        <SearchResults results={searchResults} />
+        <SearchResults results={searchResults} type={category} />
       </motion.div>
     </div>
   );
