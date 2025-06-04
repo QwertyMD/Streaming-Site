@@ -4,10 +4,19 @@ import { ArrowRight, ArrowLeft, Play, Plus, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-const ScrollableList = ({ title, highlights, type, scroll }) => {
+const ScrollableList = ({ title, highlights, type }) => {
   const { addToCollection } = useContext(CollectionsContext);
   const navigate = useNavigate();
   const containerRef = useRef(null);
+
+  const handleScroll = (ref, direction) => {
+    if (ref.current) {
+      ref.current.scrollBy({
+        left: direction === "left" ? -1000 : 1000,
+        behavior: "smooth",
+      });
+    }
+  };
 
   return (
     <motion.div
@@ -21,13 +30,13 @@ const ScrollableList = ({ title, highlights, type, scroll }) => {
           <p className="text-xl">{title}</p>
           <div className="flex gap-3">
             <button
-              onClick={() => scroll(containerRef, "left")}
+              onClick={() => handleScroll(containerRef, "left")}
               className="cursor-pointer bg-white/10 rounded-full p-1"
             >
               <ArrowLeft />
             </button>
             <button
-              onClick={() => scroll(containerRef, "right")}
+              onClick={() => handleScroll(containerRef, "right")}
               className="cursor-pointer bg-white/10 rounded-full p-1"
             >
               <ArrowRight />

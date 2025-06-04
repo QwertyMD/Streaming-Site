@@ -4,15 +4,24 @@ import { motion } from "framer-motion";
 import { CollectionsContext } from "@/contexts/CollectionsContext.jsx";
 import { useNavigate } from "react-router-dom";
 
-const HighlightList = ({ highlights, scroll }) => {
+const HighlightList = ({ highlights }) => {
   const { addToCollection } = useContext(CollectionsContext);
   const navigate = useNavigate();
   const containerRef = useRef(null);
 
+  const handleScroll = (ref, direction) => {
+    if (ref.current) {
+      ref.current.scrollBy({
+        left: direction === "left" ? -1000 : 1000,
+        behavior: "smooth",
+      });
+    }
+  };
+
   useEffect(() => {
     setInterval(() => {
-      scroll(containerRef, "right");
-    }, 3000);
+      handleScroll(containerRef, "right");
+    }, 5000);
   }, []);
 
   return (
@@ -27,13 +36,13 @@ const HighlightList = ({ highlights, scroll }) => {
 
         <div className="flex gap-3">
           <button
-            onClick={() => scroll(containerRef, "left")}
+            onClick={() => handleScroll(containerRef, "left")}
             className="cursor-pointer bg-white/10 rounded-full p-1"
           >
             <ArrowLeft />
           </button>
           <button
-            onClick={() => scroll(containerRef, "right")}
+            onClick={() => handleSroll(containerRef, "right")}
             className="cursor-pointer bg-white/10 rounded-full p-1"
           >
             <ArrowRight />

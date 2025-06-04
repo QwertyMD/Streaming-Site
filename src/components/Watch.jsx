@@ -1,20 +1,64 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import UnscrollableList from "./UnscrollableList";
+import { useNavigate } from "react-router-dom";
+import { CollectionsContext } from "@/contexts/CollectionsContext.jsx";
+import { Play, Plus } from "lucide-react";
+import axios from "axios";
 
 const Watch = ({ id, type, details }) => {
+  const { addToCollection } = useContext(CollectionsContext);
+  const [similarItems, setSimilarItems] = useState([]);
+  const navigate = useNavigate();
+
+  const handlePrimeAct = (item) => {
+    navigate(item.name ? `/tv/${item.id}` : `/movie/${item.id}`);
+  };
+
+  const handleSecAct = (item) => {
+    addToCollection(item);
+  };
+
+  useEffect(() => {
+    const fetchSimilarItems = async () => {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/${type}/${id}/similar`,
+        {
+          params: {
+            api_key: "f51f867a67bf6b61d0106400668ce722",
+            language: "en-US",
+          },
+        }
+      );
+      setSimilarItems(response.data.results);
+    };
+    fetchSimilarItems();
+  }, [id, type]);
+
+  console.log(details);
+  
+
   return (
-    <div
-      className="flex gap-3 w-full overflow-y-scroll"
-      style={{ scrollbarWidth: "none" }}
-    >
-      <div className="w-full h-2/3 bg-white/10 p-3 rounded-lg">
+    <div className="flex gap-3 w-full overflow-hidden">
+      <div
+        className="space-y-10 w-full bg-white/10 p-3 rounded-lg overflow-y-scroll"
+        style={{ scrollbarWidth: "none" }}
+      >
         <iframe
-          src={`https://player.videasy.net/${type}/${id}`}
+          src={`https://player.videasy.net/${type}/${id}?episodeSelector=true`}
           width="100%"
-          height="100%"
+          height="75%"
           allow="encrypted-media"
           allowFullScreen
           className="rounded-lg"
         ></iframe>
+        <UnscrollableList
+          title="Similar"
+          items={similarItems}
+          primeAct={handlePrimeAct}
+          secAct={handleSecAct}
+          PrimeIcon={Play}
+          SecIcon={Plus}
+        />
       </div>
 
       {details && (
@@ -27,19 +71,21 @@ const Watch = ({ id, type, details }) => {
               draggable={false}
             />
             <div className="grid gap-5 content-center">
-              <div className="">
+              <div>
                 <p>Status:</p>
                 <p className="text-sm">{details.status}</p>
               </div>
-              <div className="">
+              <div>
                 <p>Production:</p>
-                <p className="text-sm">
+                <div className="text-sm">
                   {details.production_companies
-                    .map((company) => company.name)
-                    .join("\n")}
-                </p>
+                    .slice(0, 4)
+                    .map((company, index) => (
+                      <p key={index}>{company.name}</p>
+                    ))}
+                </div>
               </div>
-              <div className="">
+              <div>
                 <p>Aired:</p>
                 {type === "tv" ? (
                   <div className="text-sm">

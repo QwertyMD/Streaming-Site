@@ -60,7 +60,7 @@ const Search = () => {
             <p>{category}</p>
             <ArrowBigDown size={20} />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-[#333537] border-none text-white">
+          <DropdownMenuContent className="bg-[#292a2d] border-none text-white">
             <DropdownMenuItem
               onClick={() => setCategory("All")}
               className="cursor-pointer"
