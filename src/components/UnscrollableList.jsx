@@ -23,7 +23,7 @@ const UnscrollableList = ({
           <div
             onClick={() => primeAct(item)}
             key={`${item.id}`}
-            className="w-36 md:w-1/5 lg:w-48 relative shrink-0 overflow-hidden rounded-lg group cursor-pointer"
+            className="w-36 md:w-42 lg:w-48 relative shrink-0 overflow-hidden rounded-lg group cursor-pointer"
           >
             <img
               src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}

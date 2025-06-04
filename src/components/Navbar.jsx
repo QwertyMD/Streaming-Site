@@ -31,7 +31,7 @@ const Navbar = () => {
 
   const mobileNav = () => {
     return (
-      <div className="lg:hidden absolute bottom-3 left-3 right-3 rounded-lg bg-[#1d1f22] p-2">
+      <div className="lg:hidden fixed z-10 bottom-3 left-3 right-3 rounded-lg bg-white/10 backdrop-blur-xl p-2">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -45,10 +45,17 @@ const Navbar = () => {
               className={(e) =>
                 `flex items-center justify-center w-12 h-12 rounded-full ${
                   e.isActive && "bg-white/10"
-                } transition-colors`
+                } transition-colors relative`
               }
             >
-              {item.icon}
+              <div className="flex gap-1">
+                {item.icon}
+                {item.name === "Collections" && (
+                  <p className="text-sm text-white absolute top-0 right-0">
+                    {collections.length || ""}
+                  </p>
+                )}
+              </div>
             </NavLink>
           ))}
         </motion.div>

@@ -40,14 +40,14 @@ const Watch = ({ id, type, details }) => {
       style={{ scrollbarWidth: "none" }}
     >
       <div
-        className="space-y-3 w-full h-full bg-white/10 p-3 rounded-lg overflow-y-scroll"
+        className="space-y-3 w-full bg-white/10 p-3 rounded-lg"
         style={{ scrollbarWidth: "none" }}
       >
         <iframe
           src={`https://player.videasy.net/${type}/${id}?episodeSelector=true`}
           allow="encrypted-media"
           allowFullScreen
-          className="rounded-lg w-full h-[calc(100%-3rem)]"
+          className="rounded-lg w-full h-[80vh]"
         ></iframe>
         <button
           onClick={() => addToCollection(details)}
