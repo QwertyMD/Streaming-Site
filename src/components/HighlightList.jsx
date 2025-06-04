@@ -11,18 +11,19 @@ const HighlightList = ({ highlights }) => {
 
   const handleScroll = (ref, direction) => {
     if (ref.current) {
+      const scrollAmount = ref.current.offsetWidth;
       ref.current.scrollBy({
-        left: direction === "left" ? -1000 : 1000,
+        left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
       });
     }
   };
 
-  useEffect(() => {
-    setInterval(() => {
-      handleScroll(containerRef, "right");
-    }, 5000);
-  }, []);
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     handleScroll(containerRef, "right");
+  //   }, 5000);
+  // }, []);
 
   return (
     <motion.div
@@ -42,7 +43,7 @@ const HighlightList = ({ highlights }) => {
             <ArrowLeft />
           </button>
           <button
-            onClick={() => handleSroll(containerRef, "right")}
+            onClick={() => handleScroll(containerRef, "right")}
             className="cursor-pointer bg-white/10 rounded-full p-1"
           >
             <ArrowRight />
@@ -56,24 +57,24 @@ const HighlightList = ({ highlights }) => {
         {highlights.map((highlight) => (
           <div
             key={`${highlight.id}`}
-            className="w-full h-[30rem] relative shrink-0 overflow-hidden rounded-lg snap-center"
+            className="w-full h-[18rem] md:h-[40vw] lg:h-[40rem] relative shrink-0 overflow-hidden rounded-lg snap-center"
           >
             <img
               src={`https://image.tmdb.org/t/p/original${highlight.backdrop_path}`}
               alt={highlight.title || highlight.name}
-              className="w-full h-full object-cover blur-lg absolute"
+              className="w-full h-full object-cover lg:blur-lg absolute"
               draggable={false}
             />
             <img
               src={`https://image.tmdb.org/t/p/original${highlight.poster_path}`}
               alt=""
               draggable={false}
-              className="w-md rounded-lg -top-10 right-30 absolute rotate-12"
+              className="w-md rounded-lg -top-10 right-30 hidden lg:block absolute rotate-12"
             />
             <div className="absolute w-full h-1/2 bottom-0 bg-gradient-to-t from-primeblack via-primeblack/30"></div>
             <div className="absolute bottom-0 left-0 w-full p-5 grid gap-3">
               <div className="flex gap-10 items-center">
-                <h2 className="text-4xl font-bold text-white">
+                <h2 className="text-2xl md:text-4xl font-bold text-white">
                   {highlight.title || highlight.name}
                 </h2>
                 <div className="flex gap-5">
@@ -108,7 +109,7 @@ const HighlightList = ({ highlights }) => {
                   {highlight.release_date}
                 </span>
               </div>
-              <p className="text-white/80 max-w-2xl">{highlight.overview}</p>
+              <p className="hidden md:block text-white/80 max-w-2xl">{highlight.overview}</p>
             </div>
           </div>
         ))}

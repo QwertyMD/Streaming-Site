@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-import UnscrollableList from "./UnscrollableList";
+import ScrollableList from "./ScrollableList";
 import { useNavigate } from "react-router-dom";
 import { CollectionsContext } from "@/contexts/CollectionsContext.jsx";
-import { Play, Plus } from "lucide-react";
+import { Play, Plus, PlusCircle } from "lucide-react";
 import axios from "axios";
 
 const Watch = ({ id, type, details }) => {
@@ -34,40 +34,38 @@ const Watch = ({ id, type, details }) => {
     fetchSimilarItems();
   }, [id, type]);
 
-  console.log(details);
-  
-
   return (
-    <div className="flex gap-3 w-full overflow-hidden">
+    <div
+      className="xl:flex gap-3 space-y-3 xl:space-y-0 w-full overflow-y-scroll"
+      style={{ scrollbarWidth: "none" }}
+    >
       <div
-        className="space-y-10 w-full bg-white/10 p-3 rounded-lg overflow-y-scroll"
+        className="space-y-3 w-full h-full bg-white/10 p-3 rounded-lg overflow-y-scroll"
         style={{ scrollbarWidth: "none" }}
       >
         <iframe
           src={`https://player.videasy.net/${type}/${id}?episodeSelector=true`}
-          width="100%"
-          height="75%"
           allow="encrypted-media"
           allowFullScreen
-          className="rounded-lg"
+          className="rounded-lg w-full h-[calc(100%-3rem)]"
         ></iframe>
-        <UnscrollableList
-          title="Similar"
-          items={similarItems}
-          primeAct={handlePrimeAct}
-          secAct={handleSecAct}
-          PrimeIcon={Play}
-          SecIcon={Plus}
-        />
+        <button
+          onClick={() => addToCollection(details)}
+          className="flex items-center justify-self-end gap-2 bg-white/10 hover:bg-white/5 transition-colors p-2 text-sm rounded-lg cursor-pointer mb-10"
+        >
+          <PlusCircle />
+          <p>Add to Collection</p>
+        </button>
+        <ScrollableList title="Similar" highlights={similarItems} type={type} />
       </div>
 
       {details && (
-        <div className="space-y-5 w-xl bg-white/10 p-3 rounded-lg">
+        <div className="space-y-5 xl:w-xl w-full bg-white/10 p-3 rounded-lg">
           <div className="flex gap-5">
             <img
               src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
               alt=""
-              className="w-48 rounded-lg"
+              className="w-44 rounded-lg"
               draggable={false}
             />
             <div className="grid gap-5 content-center">

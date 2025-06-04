@@ -10,7 +10,6 @@ const UnscrollableList = ({
   PrimeIcon,
   SecIcon,
 }) => {
-    
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -22,8 +21,9 @@ const UnscrollableList = ({
       <div className="flex flex-wrap gap-3">
         {items.map((item) => (
           <div
+            onClick={() => primeAct(item)}
             key={`${item.id}`}
-            className="w-48 relative shrink-0 overflow-hidden rounded-lg group"
+            className="w-36 md:w-1/5 lg:w-48 relative shrink-0 overflow-hidden rounded-lg group cursor-pointer"
           >
             <img
               src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
@@ -46,7 +46,10 @@ const UnscrollableList = ({
                 <PrimeIcon />
               </button>
               <button
-                onClick={() => secAct(item)}
+                onClick={(e) => {
+                  secAct(item);
+                  e.stopPropagation();
+                }}
                 className="bg-white/30 backdrop-blur-md rounded-full cursor-pointer p-2  hover:bg-white/10 transition-colors"
               >
                 <SecIcon />

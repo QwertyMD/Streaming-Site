@@ -11,8 +11,9 @@ const ScrollableList = ({ title, highlights, type }) => {
 
   const handleScroll = (ref, direction) => {
     if (ref.current) {
+      const scrollAmount = ref.current.offsetWidth * 0.8;
       ref.current.scrollBy({
-        left: direction === "left" ? -1000 : 1000,
+        left: direction === "left" ? -scrollAmount : scrollAmount,
         behavior: "smooth",
       });
     }
@@ -49,8 +50,9 @@ const ScrollableList = ({ title, highlights, type }) => {
         >
           {highlights.map((highlight) => (
             <div
+              onClick={() => navigate(`/${type}/${highlight.id}`)}
               key={`${highlight.id}`}
-              className="w-48 relative shrink-0 overflow-hidden rounded-lg group snap-center"
+              className="w-36 md:w-42 lg:w-48 relative shrink-0 overflow-hidden rounded-lg group snap-start cursor-pointer"
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500${highlight.poster_path}`}
@@ -75,7 +77,10 @@ const ScrollableList = ({ title, highlights, type }) => {
                   <Play />
                 </button>
                 <button
-                  onClick={() => addToCollection(highlight)}
+                  onClick={(e) => {
+                    addToCollection(highlight);
+                    e.stopPropagation();
+                  }}
                   className="bg-white/30 backdrop-blur-md rounded-full cursor-pointer p-2  hover:bg-white/10 transition-colors"
                 >
                   <Plus />

@@ -25,7 +25,7 @@ const Layout = () => {
 
   return (
     <div
-      className={`${!showNavbar && "bg-primeblack/90"} relative min-h-screen cursor-default text-white select-none bg-primeblack flex max-h-screen p-3 gap-3 overflow-hidden`}
+      className={`${!showNavbar && "bg-primeblack/90 pb-0"} relative min-h-screen cursor-default text-white select-none bg-primeblack flex max-h-screen p-3 lg:pb-3 pb-22 gap-3 overflow-hidden`}
     >
       {showNavbar && <Navbar />}
       <Outlet />
