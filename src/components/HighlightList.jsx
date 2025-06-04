@@ -19,11 +19,11 @@ const HighlightList = ({ highlights }) => {
     }
   };
 
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     handleScroll(containerRef, "right");
-  //   }, 5000);
-  // }, []);
+  useEffect(() => {
+    setInterval(() => {
+      handleScroll(containerRef, "right");
+    }, 5000);
+  }, []);
 
   return (
     <motion.div
@@ -83,7 +83,7 @@ const HighlightList = ({ highlights }) => {
                       navigate(
                         highlight.media_type === "tv"
                           ? `/tv/${highlight.id}`
-                          : `/movie/${highlight.id}`,
+                          : `/movie/${highlight.id}`
                       )
                     }
                     className="bg-white/30 backdrop-blur-md rounded-full cursor-pointer p-2  hover:bg-white/10 transition-colors"
@@ -109,7 +109,9 @@ const HighlightList = ({ highlights }) => {
                   {highlight.release_date}
                 </span>
               </div>
-              <p className="hidden md:block text-white/80 max-w-2xl">{highlight.overview}</p>
+              <p className="hidden md:block text-white/80 max-w-2xl">
+                {highlight.overview}
+              </p>
             </div>
           </div>
         ))}
