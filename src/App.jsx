@@ -11,26 +11,30 @@ import { CollectionsProvider } from "@/contexts/CollectionsContext.jsx";
 import WatchMovie from "@/pages/WatchMovie.jsx";
 import WatchShow from "./pages/WatchShow";
 import Search from "@/pages/Search.jsx";
+import ToastProvider from "@/components/ToastProvider.jsx";
 
 const App = () => {
   return (
-    <CollectionsProvider>
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Landing />} />
-            <Route path="search" element={<Search />} />
-            <Route path="home" element={<Home />} />
-            <Route path="movies" element={<Movies />} />
-            <Route path="shows" element={<Shows />} />
-            <Route path="collections" element={<Collections />} />
-            <Route path="movie/:id" element={<WatchMovie />} />
-            <Route path="tv/:id" element={<WatchShow />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-        </Routes>
-      </HashRouter>
-    </CollectionsProvider>
+    <>
+      <CollectionsProvider>
+        <HashRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Landing />} />
+              <Route path="search" element={<Search />} />
+              <Route path="home" element={<Home />} />
+              <Route path="movies" element={<Movies />} />
+              <Route path="shows" element={<Shows />} />
+              <Route path="collections" element={<Collections />} />
+              <Route path="movie/:id" element={<WatchMovie />} />
+              <Route path="tv/:id" element={<WatchShow />} />
+              <Route path="*" element={<NotFound />} />
+            </Route>
+          </Routes>
+        </HashRouter>
+      </CollectionsProvider>
+      <ToastProvider />
+    </>
   );
 };
 
